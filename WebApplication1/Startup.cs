@@ -1,9 +1,12 @@
 ﻿using Microsoft.Owin;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Owin;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net.Http.Formatting;
 using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -37,7 +40,16 @@ namespace WebApplication1
         public static HttpConfiguration CreateHttpConfiguration()
         {
             var httpConfiguration = new HttpConfiguration();
+
             httpConfiguration.MapHttpAttributeRoutes();
+
+            httpConfiguration.Formatters.Clear();
+            httpConfiguration.Formatters.Add(new JsonMediaTypeFormatter());
+            httpConfiguration.Formatters.JsonFormatter.SerializerSettings =
+            new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
 
             return httpConfiguration;
         }
