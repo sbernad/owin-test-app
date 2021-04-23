@@ -22,8 +22,6 @@ namespace WebApplication1
         public static void Configuration(IAppBuilder app)
         {
             var httpConfiguration = CreateHttpConfiguration();
-            Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.Active.InstrumentationKey = 
-                ConfigurationManager.AppSettings["appInsights:InstrumentationKey"];
             httpConfiguration.Routes.MapHttpRoute(
                 name: "Default",
                 routeTemplate: "{prefix}/{controller}");
