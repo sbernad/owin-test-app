@@ -39,6 +39,8 @@ namespace WebApplication1.Controllers
 
                    if(beStrict && (thisTemp == MinTemp || thisTemp == MaxTemp))
                    {
+                        Trace.TraceError($"Current temp is = {thisTemp} with Min,Max = {MinTemp},{MaxTemp}");
+
                         throw new ArgumentOutOfRangeException();
                    }
 
